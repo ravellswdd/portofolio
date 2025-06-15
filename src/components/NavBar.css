@@ -1,0 +1,29 @@
+.nav-bar {
+  margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.image {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.png {
+    border-radius: 100%;
+    height: auto;
+    width: 250px;
+}
+
+.icons {
+  margin: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.5rem;
+}
