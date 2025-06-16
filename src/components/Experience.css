@@ -1,0 +1,12 @@
+.exp {
+    border-bottom: 1px solid #262626;
+    padding-bottom: 1rem;
+}
+
+.exp-title {
+    text-align: center;
+    font-size: 2.25rem;
+    line-height: 2.25rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}

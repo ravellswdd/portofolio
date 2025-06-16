@@ -2,6 +2,8 @@ import NavBar from './components/NavBar.tsx'
 import Intro from './components/Intro.tsx'
 import About  from './components/About.tsx'
 import './App.css'
+import Technology from './components/Technology.tsx'
+import Experience from './components/Experience.tsx'
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <NavBar/>
           <Intro/>
           <About/>
+          <Technology/>
+          <Experience/>
         </div>
     </div>
   )

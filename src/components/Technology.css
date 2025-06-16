@@ -1,0 +1,61 @@
+.tech-border {
+    border-bottom: 1px solid #262626;
+    padding-bottom: 6rem;
+}
+
+.tech-title {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    text-align: center;
+    font-size: 2.25rem;
+    line-height: 2.25rem;
+}
+
+.tech-icon-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.border-icon {
+    border-radius: 1rem;
+    border-width: 4px;
+    border-color: #262626;
+    padding: 1rem;
+}
+
+.react-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #22d3ee;
+}
+
+.html-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #e34c26;
+}
+
+.css-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #264de4;
+}
+
+.java-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #e76f00;
+}
+
+.javascript-icon {
+    font-size: 4.5rem;
+    line-height: 1;
+    color: #f7df1e;
+}
+
+/* python import dri luar jdi gaperlu pke styling css */
+/* mySQL import dri luar jdi gaperlu pke styling css */
+/* C import dri luar jdi gaperlu pke styling css */
