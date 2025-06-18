@@ -1,60 +1,63 @@
-.exp {
+.projects {
     border-bottom: 1px solid #262626;
     padding-bottom: 1rem;
 }
 
-.exp-title {
+.proj-title {
     margin: 5rem 0;
     text-align: center;
     font-size: 2.25rem;
 }
 
-.exp-container {
+.proj-container {
     margin-bottom: 2rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content:space-between;
+    justify-content: center;
+    gap: 7rem;
 }
 
-.year-container {
+.image-container {
   width: 100%;
 }
 
 @media (min-width: 1024px) {
-  .year-container {
+  .image-container {
     width: 25%;
   }
 }
 
-.year {
-    margin-bottom: 0.5rem;      
-    font-size: 2rem;         
-    color: #9ca3af;
+.image {
+    width: 150;
+    height: 150;
+    border-radius: 100%;
+    margin-bottom: 1.5rem;
 }
 
-.text-container {
-    max-width: 45rem;
+.box-container {
+    padding-top: 4rem;
+    max-width: 25rem;
 }
 
-.head-text {
+.title-text {
     margin-bottom: 1rem;
     font-weight: 600;
     font-size: 1.2rem;
     color: #ddd6fe;
 }
 
-.desc-text {
+.desc {
     text-align: justify;
     margin-bottom: 1rem;
 }
 
-.tool-container {
+.tools-container {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-.tools-text {
+.tools {
     margin-right: 0.5rem;
     margin-top: 1rem;
     border-radius: 0.25rem;

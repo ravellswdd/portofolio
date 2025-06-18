@@ -7,7 +7,7 @@ function About() {
             <div className='image-flex'>
                 <div className='image-width'>
                     <div className='image-container'>
-                        <img  src="me-pic.JPG" alt="about-pic" className='png'/>
+                        <img className='png' src="about.JPG" alt="about-pic" />
                     </div>
                 </div>
                 <div className='desc-container'>

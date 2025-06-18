@@ -4,6 +4,7 @@ import About  from './components/About.tsx'
 import './App.css'
 import Technology from './components/Technology.tsx'
 import Experience from './components/Experience.tsx'
+import Project from './components/Project.tsx'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <About/>
           <Technology/>
           <Experience/>
+          <Project/>
         </div>
     </div>
   )

@@ -9,11 +9,46 @@
     text-align: center;
     font-size: 2.25rem;
     line-height: 2.25rem;
+    letter-spacing: 0.3rem;
+    font-weight: bold;
 }
 
-.tech-icon-container {
-    display: flex;
+.web-dev-container {
     flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.web-title {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+}
+
+.web-dev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.prog-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.prog-title {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+}
+
+.prog-db {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -56,6 +91,9 @@
     color: #f7df1e;
 }
 
+.ts-icon {
+    border-radius: 10px;
+}
 /* python import dri luar jdi gaperlu pke styling css */
 /* mySQL import dri luar jdi gaperlu pke styling css */
 /* C import dri luar jdi gaperlu pke styling css */

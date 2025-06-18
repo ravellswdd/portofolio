@@ -8,22 +8,22 @@ function Intro() {
                     <div className="intro-container">
                         <h1 className='person'>Ravellino Suwandi</h1>
                         <span className='low-desc'>
-                            An Undergraduate Computer Science Student <br /> Binus University - Intelligent Systems
+                            An Undergraduate Student <br /> Binus University - Computer Science
                         </span>
                         <p className='desc'>
-                           I am an undergraduate Computer Science student driven by a strong 
-                           passion for learning and exploring the world of coding. 
-                           With over two years of academic and hands-on experience, 
-                           I have developed proficiency in various programming languages and 
-                           technologies, including C, Python, Java, HTML, CSS, React, and MySQL. 
-                           My goal is to apply my skills and knowledge to create meaningful solutions
-                           and products that bring real value to society.
+                           To me, technology goes beyond just components and hardware; it includes the passionate 
+                           individuals who propel innovation forward. As an engaged university student and nonprofit 
+                           staff member, I see technology as a powerful tool for making a positive difference. 
+                           I am dedicated to broadening my knowledge, enhancing my creativity, and honing vital 
+                           skills in communication, teamwork, and team management. At present, I am excited to 
+                           contribute to meaningful projects, collaborating with like-minded individuals who share 
+                           a commitment to impact and purpose.
                         </p>
                     </div>
                 </div>
                 <div className='profile-pic'>
                     <div className='pic-container'>
-                        <img src="max.jpg" alt="Ravellino Suwandi" className='pic-image'/>
+                        <img src="me-pic.JPG" alt="Ravellino Suwandi" className='pic-image'/>
                     </div>
                 </div>
             </div>
