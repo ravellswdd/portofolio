@@ -2,13 +2,14 @@
     border: none;
     padding-bottom: 1rem;          
     @media (min-width: 1024px) {
-    margin-bottom: 8.75rem;        
+    margin-bottom: 8.75rem;    
     } 
 }
 
 .flexing-container {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 10rem;
 }
 
 .mb-view {

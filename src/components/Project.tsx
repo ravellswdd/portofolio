@@ -12,7 +12,7 @@ function Project() {
                             <img className='image' src={project.image} alt="proj images" />
                         </div> 
                         <div className='box-container'>
-                            <p className='title-text'>{project.title}</p>
+                            <a className='title-text' href={project.link} target="_blank" rel="noopener noreferrer">{project.title}</a>
                             <p className='desc'>{project.desc}</p>
                             <div className='tools-container'>
                                 {project.tools.map((item, index) => (
