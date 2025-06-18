@@ -7,7 +7,7 @@ function About() {
             <div className='image-flex'>
                 <div className='image-width'>
                     <div className='image-container'>
-                        <img className='png' src="progg.webp" alt="about-pic" />
+                        <img  src="me-pic.JPG" alt="about-pic" className='png'/>
                     </div>
                 </div>
                 <div className='desc-container'>

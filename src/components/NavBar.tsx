@@ -6,13 +6,13 @@ function NavBar() {
   return (
     <nav className="nav-bar">
         <div className="image">
-            <img src="RvL.png" alt="logo" className="png"/>
+          <img src="RvL.png" alt="logo" className="image-pic"/>
         </div>
         <div className="icons">
-            <FaLinkedin/>
-            <FaGithub/>
-            <FaInstagram/>
-            <FaSquareTwitter/>
+          <FaLinkedin/>
+          <FaGithub/>
+          <FaInstagram/>
+          <FaSquareTwitter/>
         </div>
     </nav>
   )

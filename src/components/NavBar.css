@@ -13,10 +13,9 @@
   align-items: center;
 }
 
-.png {
-    border-radius: 100%;
-    height: auto;
-    width: 250px;
+.image-pic {
+  border-radius: 100%;
+  height: 100px;
 }
 
 .icons {
