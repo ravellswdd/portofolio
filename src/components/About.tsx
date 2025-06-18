@@ -5,10 +5,8 @@ function About() {
         <div className='title-border'>
             <h2 className='title'>About Me</h2>
             <div className='image-flex'>
-                <div className='image-width'>
-                    <div className='image-container'>
-                        <img className='png' src="about.JPG" alt="about-pic" />
-                    </div>
+                <div className='image-container'>
+                    <img className='png' src="about.JPG" alt="about-pic" />
                 </div>
                 <div className='desc-container'>
                     <div className='desc-about'>
