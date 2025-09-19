@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 function Experience() {
     return (
-        <div className='exp'>
+        <div id="Experience" className='exp'>
             <motion.h2
             initial = {{y: -50, opacity: 0}}
             whileInView={{y: 0, opacity: 1}}

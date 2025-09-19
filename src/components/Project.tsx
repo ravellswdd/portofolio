@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 function Project() {
     return (
-        <div className="projects">
+        <div id="Projects" className="projects">
             <motion.h2
             initial={{ y: -50, opacity: 0 }}
             whileInView={{y: 0, opacity: 1}}

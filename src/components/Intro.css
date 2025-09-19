@@ -1,15 +1,15 @@
 .border {
+    padding-top: 13rem;
     border: none;
-    padding-bottom: 1rem;          
-    @media (min-width: 1024px) {
-    margin-bottom: 8.75rem;    
-    } 
+    padding-bottom: 1rem;
 }
 
 .flexing-container {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     flex-wrap: wrap;
-    margin-bottom: 10rem;
+    margin-bottom: 1rem;
 }
 
 .mb-view {

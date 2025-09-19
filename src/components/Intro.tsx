@@ -17,7 +17,7 @@ function Intro() {
                         animate={{ x: 0, opacity: 1}}
                         transition={{ duration: 0.7, delay: 0.3}}
                         className='low-desc'>
-                            An Undergraduate Student <br /> Binus University - Computer Science
+                            A Computer Science Undergraduate <br /> BINUS University - Streaming Intelligent Systems
                         </motion.span>
                         <motion.p 
                         initial={{ x: -100, opacity: 0}} 

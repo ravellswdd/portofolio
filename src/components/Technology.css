@@ -1,6 +1,8 @@
 .tech-border {
+    padding-top: 4rem;
     border-bottom: 1px solid #262626;
     padding-bottom: 6rem;
+    border: none;
 }
 
 .tech-title {

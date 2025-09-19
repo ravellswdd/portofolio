@@ -3,7 +3,7 @@ import './About.css'
 
 function About() {
     return (
-        <div className='title-border'>
+        <div id="About" className='title-border'>
             <motion.h2 
             initial = {{ y: -100, opacity: 0}}
             whileInView = {{ y: -20, opacity: 1}}
@@ -15,7 +15,7 @@ function About() {
                     initial = {{ x: -100, opacity: 0}}
                     whileInView = {{ x: 0, opacity: 1}}
                     transition={{ duration: 1, ease: 'circOut'}}
-                    className='png' src="about.JPG" alt="about-pic" />
+                    className='png' src="aboutt.jpg" alt="about-pic" />
                 </div>
                 <div className='desc-container'>
                     <div className='desc-about'>
