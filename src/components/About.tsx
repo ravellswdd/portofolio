@@ -15,23 +15,37 @@ function About() {
                     initial = {{ x: -100, opacity: 0}}
                     whileInView = {{ x: 0, opacity: 1}}
                     transition={{ duration: 1, ease: 'circOut'}}
-                    className='png' src="aboutt.jpg" alt="about-pic" />
+                    className='png' src="intro.JPG" alt="about-pic" />
                 </div>
-                <div className='desc-container'>
-                    <div className='desc-about'>
-                        <motion.p
-                        initial = {{ x: 100, opacity: 0}}
-                        whileInView = {{ x: 0, opacity: 1}}
-                        transition={{ duration: 1, ease: 'circOut'}}
-                        >I am an undergraduate Computer Science student driven by a strong 
-                        passion for learning and exploring the world of coding. 
-                        With over two years of academic and hands-on experience, 
-                        I have developed proficiency in various programming languages and 
-                        technologies, including C, Python, Java, HTML, CSS, React, and MySQL. 
-                        My goal is to apply my skills and knowledge to create meaningful solutions
-                        and products that bring real value to society.</motion.p>
+                <motion.div 
+                    initial = {{ x: 100, opacity: 0}}
+                    whileInView = {{ x: 0, opacity: 1}}
+                    transition={{ duration: 1, ease: 'circOut'}}className='desc-container'>
+                    <div className='fyi'>
+                        <div className='fyi-box'>
+                            <p className='fyi-head'>3+</p>
+                            <p className='fyi-desc'>Experience<br />in Coding</p>
+                        </div>
+                        <div className='fyi-box'>
+                            <p className='fyi-head'>5+</p>
+                            <p className='fyi-desc'>Programming<br />Language</p>
+                        </div>
+                        <div className='fyi-box'>
+                            <p className='fyi-head'>10+</p>
+                            <p className='fyi-desc'>AI Models<br />Trained</p>
+                        </div>
                     </div>
-                </div>
+                    <div className='desc-about'>
+                        <p
+                        >I am an undergraduate Computer Science student at BINUS University, 
+                        passionate about coding, intelligent systems, and technology. With over 
+                        two years of academic and hands-on experience, I have gained proficiency 
+                        in C, Python, Java, HTML, CSS, React, and MySQL. Beyond academics, I actively 
+                        engage in nonprofit campus organizations, where I develop skills in teamwork, 
+                        communication, and project management. I strive to create meaningful solutions 
+                        that bring real value to society while continuously learning and growing with purpose.</    p>
+                    </div>
+                </motion.div>
             </div>
         </div>
     )

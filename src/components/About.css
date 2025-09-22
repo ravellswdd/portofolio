@@ -1,75 +1,70 @@
 .title-border {
-    border-bottom: 1px solid #171717;
-    padding-bottom: 1rem;
     border: none;
-    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+    padding-top: 5rem;
+    width: 100%;
+    max-width: 1024px;
 }
 
 .title {
-    margin-top: 10rem;
-    margin-bottom: 3rem;
+    padding-top: 10rem;
+    padding-bottom: 3rem;
     text-align: center;
     font-size: 2.25rem;
     line-height: 2.5rem;
-    justify-content: center;
 }
 
 .image-flex {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 10rem;
+    align-items: center;
+    gap: 10rem;
 }
 
-.image-width {
-    width: 1000%;
+.fyi {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    padding-bottom: 2rem;
 }
 
-@media (min-width: 1024px) {
-    .image-width {
-        width: 50%;
-        padding: 2rem;
-    }
+.fyi-box {
+    border: 3px solid #262626;
+    background-color: #171717;
+    padding: 1rem 1rem;
+    border-radius: 10px;
+}
+
+.fyi-head {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 1000;
+    background-image: linear-gradient(to right, #f9a8d4, #64748b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+}
+
+.fyi-desc {
+    text-align: center;
+    font-weight: 500;
 }
 
 .image-container {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    width: 320px;
-    height: 320px;
-    overflow: hidden;
-    position: relative;
+    flex-shrink: 0;
 }
 
 .png {
-    border-radius: 1rem;
-    width: 100%;
-    height: 100%;
+    border-radius: 3rem;
+    max-width: 350px;
     object-fit: cover;
     object-position: 70% center;
-}
 
-.desc-container {
-    width: 100%;
-}
-
-@media (min-width: 1024px) {
-    .desc-container {
-        width: 50%;
-    }
 }
 
 .desc-about {
-    display: flex;
-    justify-content: center;
-    margin-top: 11rem;
     text-align: justify;
-
-}
-
-@media (min-width: 1024px) {
-    .desc-about {
-        justify-content: flex-start;
-    }
+    font-size: 15px;
 }

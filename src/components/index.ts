@@ -9,37 +9,60 @@ export const EXPERIENCES = [
     { // CateringZ
         year: "Apr - Jun 2024",
         role: "Full Stack Web Developer",
-        type: "Personal Assignment",
-        desc: 'CateringZ was my first individual project from campus, sparking my interest in website development despite my limited knowledge. I learned HTML and CSS to turn my Figma design into a functional site, creating five linked pages and implementing a backend for email registration using JavaScript. The project was challenging due to scheduling issues and my initial lack of web development expertise, which caused delays. However, through consistency and discipline in meeting deadlines, I reorganized my schedule to enhance my progress in building the website.',
+        type: "Personal Assignment - CateringZ",
         tools: ['HTML','CSS','Javascript']
     },
     { // FitTrack
         year: "Oct - Dec 2024",
         role: "Machine Learning Engineer",
-        type: "Group Assignment",
-        desc: 'FitTrack inspired me to pursue Intelligent System streaming due to my struggles with junk food and exercise. I proposed an AI model to predict food images and their calorie counts per 100g, catering to those wanting to eat healthily. I researched datasets, preprocessed data, and used a pre-trained model while my teammates worked on user experience for image input. I faced minor challenges as I was new to AI model creation, struggling with unfamiliar code structures. To address this, I used YouTube and AI tools to learn necessary coding syntax and concepts.',
-        tools: ['Python Programming']
+        type: "Group Assignment - FitTrack",
+        tools: ['Python']
     },
     { // TukangIN
         year: "Feb - Jun 2025",
         role: "Database Engineer",
-        type: "Group Assignment",
-        desc: 'TukangIN connects consumers with reliable technicians for household needs, addressing the challenge of finding trustworthy electronic technicians. I contributed by creating and maintaining the database and UML diagrams. Despite a well-designed web application, we encountered UI optimization issues, miscommunication, and misdirected respondents, which delayed progress. To resolve these, we conducted evaluations, retargeted respondents, improved communication clarity, and reorganized our development schedule for collaborative UI optimization.',
+        type: "Group Assignment - TukangIN",
         tools: ['React','Typescript','CSS','PostgreSQL']
     },
     { // TrafficSign
         year: "Feb - Jun 2025",
         role: "Machine Learning Engineer Assistant",
-        type: "Group Assignment",
-        desc: "Whenever I travel to another country, I always pay attention to the road signs I pass. I often wonder if tourists might need quick access to this information. With that in mind, I proposed to my teammates the idea of developing an AI model for traffic sign detection. I played a role in fine-tuning the model’s architecture and examining trial errors to understand what was happening. Eventually, we successfully built and completed the project. I encountered some challenges while trying to resolve an error related to the model's test accuracy, but I was able to identify the issue and sent a revision to my teammate for further updates.",
-        tools: ['Python Programming', 'React', 'Typescript','CSS']
+        type: "Group Assignment - TrafficSign",
+        tools: ['Python', 'React', 'Typescript','CSS']
     },
     { // Personal Project
         year: "Apr - Jun 2025",
         role: "Frontend Web Developer",
         type: "Personal Project",
-        desc: 'In semester 4, I recognized the importance of a portfolio in attracting attention to my work, prompting me to create a web-based portfolio using React, TypeScript, and CSS. This project served not only as a personal endeavor but also as a learning platform for new technologies. Despite facing challenges, such as limited creativity due to my learning stage, I used existing web portfolios as references while striving to differentiate mine with unique backgrounds and component positioning to build my confidence in a rapidly evolving tech landscape.',
         tools: ['React','Typescript','CSS']
+    }
+]
+
+export const ORGANIZATION = [
+    {
+        role: "Vice Chairman of Student Council",
+        org: "Ignatius Slamet Riyadi Highschool Karawang",
+        year: "Jan 2024 - Jan 2025"
+    },
+    {
+        role: "Activist of Art, Sport, and Internal Relations",
+        org: "Keluarga Mahasiswa Buddhis Dhammavaddhana",
+        year: "Jan 2024 - Jan 2025"
+    },
+    {
+        role: "Event Division Staff of One Million Help 2024",
+        org: "Keluarga Mahasiswa Buddhis Dhammavaddhana",
+        year: "Feb 2024 - Jun 2024"
+    },
+    {
+        role: "Logistic Division Coordinator of PMB X WP 2024",
+        org: "Keluarga Mahasiswa Buddhis Dhammavaddhana",
+        year: "May 2024 - Sept 2024"
+    },
+    {
+        role: "Staff of Art, Sport, and Internal Relations",
+        org: "Keluarga Mahasiswa Buddhis Dhammavaddhana",
+        year: "Jan 2025 - Present"
     }
 ]
 
@@ -56,7 +79,7 @@ export const PROJECTS = [
         title: "FitTrack - CLI Based",
         link: "https://colab.research.google.com/drive/1VDyjW8DnE_2lMqwJ4qJt5ozyg-b77r6R?usp=sharing",
         desc: "FitTrack is an AI-powered app that recognizes food from images and displays its estimated calories per 100g. Designed for simplicity and ease of use, it helps users make healthier choices on the go. Ideal for those looking to track nutrition effortlessly.",
-        tools: ['Python Programming']
+        tools: ['Python']
     },
     { // tukangin
         image: tukangin,
@@ -70,7 +93,7 @@ export const PROJECTS = [
         title: "SignScanner - Website",
         link: "https://github.com/VincentiusJacob/TrafficSignScanner",
         desc: "SignScanner is a web-based app that identifies traffic signs and provides their descriptions. It’s designed to assist tourists in understanding local road signs while traveling abroad. The app enhances safety and navigation in unfamiliar environments.",
-        tools: ['Python Programming', 'React', 'Typescript','CSS']
+        tools: ['Python', 'React', 'Typescript','CSS']
     },
     { // personal project
         image: portfolio,

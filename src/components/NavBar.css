@@ -1,20 +1,18 @@
 .nav-bar {
-  position: fixed;      /* bikin nempel */
-  top: 0;               /* tempel di paling atas */
-  left: 0;
-  width: 100%;          /* full width */
-  z-index: 50;        /* biar di atas konten lain */
-  
-  margin-bottom: 1rem;
+  position: fixed;
+  width: 100%;          
+  max-width: 1024px;
+  margin: 0 auto;           /* biar center kalau ada max-width */
+  padding: 1.5rem 0;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 2rem;
+  align-items: center;
+  padding-top: 1.5rem;
+  z-index: 100;
 }
 
 .image {
   display: flex;
-  flex-shrink: 0;
   align-items: center;
 }
 
@@ -24,15 +22,12 @@
 }
 
 .icons {
-  padding-bottom: 2rem;
-  margin: 2rem;
-  display: flex;
-  align-items: right;
-  justify-content: center;
-  gap: 3rem;
-  font-size: 1.5rem;
+ display: flex;
+ padding-bottom: 1rem;
+ gap: 3rem;
 }
 
 .icons p{
   font-size: 17px;
+  cursor: pointer;
 }

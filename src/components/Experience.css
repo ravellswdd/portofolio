@@ -1,16 +1,53 @@
-.exp {
-    border-bottom: 1px solid #262626;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+.exp-border {
+    padding-top: 12rem;
+    width: 100%;
+    max-width: 1024px;
 }
 
-.exp-title {
-    margin: 5rem 0;
-    text-align: center;
-    font-size: 2.25rem;
+.exp-proj {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+
+}
+
+.exp-box {
+    border: 2px solid #262626;
+    border-radius: 40px;
+    width: 100%;
+    padding: 1.5rem 1.5rem;
+}
+
+.exp-box h2 {
+    font-size: 32px;
+    text-align: left;
+    padding-bottom: 2rem;
 }
 
 .exp-container {
+    padding-bottom: 1rem;
+    padding-left: 2.5rem;
+}
+
+.role {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.type {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(155, 174, 194);
+}
+
+.year {
+    font-size: 14px;
+    font-weight: 600;
+    color: lightslategrey;
+    padding-top: 0.1rem;
+}
+
+/* .exp-container {
     margin-bottom: 2rem;
     display: flex;
     flex-wrap: wrap;
@@ -65,4 +102,4 @@
     font-weight: 500;
     color: #5b21b6;
     width: fit-content;
-}
+} */
