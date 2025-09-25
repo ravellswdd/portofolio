@@ -105,7 +105,7 @@ export const PROJECTS = [
         git: "https://github.com/VincentiusJacob/TrafficSignScanner",
         desc: "SignScanner is a web-based app that identifies traffic signs and provides their descriptions. It’s designed to assist tourists in understanding local road signs while traveling abroad. The app enhances safety and navigation in unfamiliar environments.",
         tools: ['Python', 'React', 'Typescript','CSS'],
-        yt: "https://youtube.com/shorts/KOFKf9vU9Vw?feature=share"
+        yt: "https://youtube.com/shorts/KOFKf9vU9Vw?feature=sharen"
     },
     { // personal project
         image: portfolio,
