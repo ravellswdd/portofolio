@@ -2,6 +2,13 @@ import { motion } from 'framer-motion'
 import './Intro.css'
 
 function Intro() {
+    const scrollToSection = (id: string) => {
+        const section = document.getElementById(id);
+        if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
         <div className="border">
             <div className="flexing-container">
@@ -38,6 +45,32 @@ function Intro() {
                         contribute to meaningful projects, collaborating with like-minded individuals who share 
                         a commitment to impact and purpose.
                     </motion.p>
+                    
+                    <motion.div
+                        initial={{ x: -100, opacity: 0}} 
+                        animate={{ x: 0, opacity: 1}}
+                        transition={{ duration: 0.7, delay: 0.5}}
+                    className='cv-git-btn'>
+                        <motion.button
+                        whileHover={{scale: 1.1}}
+                        transition={{duration: 0.5, ease: "easeOut"}}
+                        className='btn'
+                        onClick={() => scrollToSection("Projects")}
+                        >View My Projects</motion.button>
+                        <motion.button
+                        whileHover={{scale: 1.1}}
+                        transition={{duration: 0.5, ease: "easeOut"}}
+                        className='btn'
+                        onClick={() => window.open("https://github.com/ravellswdd", "_blank")}
+                        >View My Github</motion.button>
+                        <motion.button
+                        whileHover={{scale: 1.1}}
+                        transition={{duration: 0.5, ease: "easeOut"}}
+                        className='btn'
+                        onClick={() => window.open("https://drive.google.com/file/d/1u87Io60ToDB9KmkbkTbAaSZxoAreWLhm/view?usp=sharing", "_blank")}
+                        >Download CV</motion.button>
+                    </motion.div>
+
                 </div>
                 <div className='profile-pic'>
                     <div className='pic-container'>

@@ -74,7 +74,8 @@ export const PROJECTS = [
         role: "Full Stack Web Developer",
         git: "https://github.com/ravellswdd/cateringz",
         desc: "CateringZ is a web-based app for ordering healthy, nutritious meals. It offers a simple way to choose dishes and have them delivered directly to your home. The platform promotes balanced eating through convenient meal planning.",
-        tools: ['HTML','CSS','Javascript']
+        tools: ['HTML','CSS','Javascript'],
+        yt: "https://youtu.be/CGfc70pwgAQ"
     },
     { // fittrack
         image: fittrack,
@@ -83,7 +84,8 @@ export const PROJECTS = [
         role: "Machine Learning Engineer",
         git: "https://colab.research.google.com/drive/1VDyjW8DnE_2lMqwJ4qJt5ozyg-b77r6R?usp=sharing",
         desc: "FitTrack is an AI-powered app that recognizes food from images and displays its estimated calories per 100g. Designed for simplicity and ease of use, it helps users make healthier choices on the go. Ideal for those looking to track nutrition effortlessly.",
-        tools: ['Python']
+        tools: ['Python'],
+        yt: "https://drive.google.com/file/d/16GvONIdFFLF6sVOO2Iuas0b15OhS3nl8/view?usp=drive_link"
     },
     { // tukangin
         image: tukangin,
@@ -92,7 +94,8 @@ export const PROJECTS = [
         git: "https://github.com/VincentiusJacob/TukangIN",
         role: "Database Engineer",
         desc: "TukangIN is a platform that connects users with verified and trusted household technicians. It covers various home services with transparent and reasonable pricing. The app ensures convenience, reliability, and quality service for everyday household needs.",
-        tools: ['React','Typescript','CSS','PostgreSQL']
+        tools: ['React','Typescript','CSS','PostgreSQL'],
+        yt: "https://www.youtube.com/watch?v=8Tdfyb0xTBs"
     },
     { // traffic sign
         image: signscanner,
@@ -101,7 +104,8 @@ export const PROJECTS = [
         role: "Machine Learning Engineer Assistant",
         git: "https://github.com/VincentiusJacob/TrafficSignScanner",
         desc: "SignScanner is a web-based app that identifies traffic signs and provides their descriptions. It’s designed to assist tourists in understanding local road signs while traveling abroad. The app enhances safety and navigation in unfamiliar environments.",
-        tools: ['Python', 'React', 'Typescript','CSS']
+        tools: ['Python', 'React', 'Typescript','CSS'],
+        yt: "https://youtube.com/shorts/KOFKf9vU9Vw?feature=share"
     },
     { // personal project
         image: portfolio,
@@ -110,6 +114,7 @@ export const PROJECTS = [
         type: "(Personal Project)",
         role: "Frontend Web Developer",
         desc: "This portfolio project was created to strengthen my confidence in preparing for a professional career. It also serves as a platform to expand and apply my web development skills. Through this project, I explored new tools and refined my personal style.",
-        tools: ['React','Typescript','CSS']
+        tools: ['React','Typescript','CSS'],
+        yt: "https://youtu.be/5rIAhUPneX0"
     }
 ]

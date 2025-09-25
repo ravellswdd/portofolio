@@ -72,6 +72,7 @@ function Project() {
               lang={selectedProj?.tools || ""}
               type={selectedProj?.type || ""}
               git={selectedProj?.git || ""}
+              yt={selectedProj?.yt || ""}
             />
         </div>
     )

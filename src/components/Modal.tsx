@@ -11,10 +11,11 @@ interface ModalProps {
     lang: string[]
     type: string
     git: string
+    yt: string
 }
 
 
-function Modal({ isOpen, onClose, title, type, description, img, role, lang,git}: ModalProps) {
+function Modal({ isOpen, onClose, title, type, description, img, role, lang, git, yt}: ModalProps) {
     if (!isOpen) return null
     
     return (
@@ -40,6 +41,7 @@ function Modal({ isOpen, onClose, title, type, description, img, role, lang,git}
                     onClick={() => window.open(git, "_blank")}
                     className="demo-btn">View Project</button>
                     <button
+                    onClick={() => window.open(yt, "_blank")}
                     className="demo-btn">View Demo</button>
                 </div>
             </div>
