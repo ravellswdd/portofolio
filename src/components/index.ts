@@ -70,35 +70,45 @@ export const PROJECTS = [
     { // cateringz
         image: cateringz,
         title: "CateringZ - Website",
-        link: "https://github.com/ravellswdd/cateringz",
+        type: "(Personal Assignment)",
+        role: "Full Stack Web Developer",
+        git: "https://github.com/ravellswdd/cateringz",
         desc: "CateringZ is a web-based app for ordering healthy, nutritious meals. It offers a simple way to choose dishes and have them delivered directly to your home. The platform promotes balanced eating through convenient meal planning.",
         tools: ['HTML','CSS','Javascript']
     },
     { // fittrack
         image: fittrack,
         title: "FitTrack - CLI Based",
-        link: "https://colab.research.google.com/drive/1VDyjW8DnE_2lMqwJ4qJt5ozyg-b77r6R?usp=sharing",
+        type: "(Group Assignment)",
+        role: "Machine Learning Engineer",
+        git: "https://colab.research.google.com/drive/1VDyjW8DnE_2lMqwJ4qJt5ozyg-b77r6R?usp=sharing",
         desc: "FitTrack is an AI-powered app that recognizes food from images and displays its estimated calories per 100g. Designed for simplicity and ease of use, it helps users make healthier choices on the go. Ideal for those looking to track nutrition effortlessly.",
         tools: ['Python']
     },
     { // tukangin
         image: tukangin,
         title: "TukangIN - Website",
-        link: "https://github.com/VincentiusJacob/TukangIN",
+        type: "(Group Assignment)",
+        git: "https://github.com/VincentiusJacob/TukangIN",
+        role: "Database Engineer",
         desc: "TukangIN is a platform that connects users with verified and trusted household technicians. It covers various home services with transparent and reasonable pricing. The app ensures convenience, reliability, and quality service for everyday household needs.",
         tools: ['React','Typescript','CSS','PostgreSQL']
     },
     { // traffic sign
         image: signscanner,
         title: "SignScanner - Website",
-        link: "https://github.com/VincentiusJacob/TrafficSignScanner",
+        type: "(Group Assignment)",
+        role: "Machine Learning Engineer Assistant",
+        git: "https://github.com/VincentiusJacob/TrafficSignScanner",
         desc: "SignScanner is a web-based app that identifies traffic signs and provides their descriptions. It’s designed to assist tourists in understanding local road signs while traveling abroad. The app enhances safety and navigation in unfamiliar environments.",
         tools: ['Python', 'React', 'Typescript','CSS']
     },
     { // personal project
         image: portfolio,
-        link: "https://github.com/ravellswdd/react-portofolio",
+        git: "https://github.com/ravellswdd/react-portofolio",
         title: "RvL Portfolio - Website",
+        type: "(Personal Project)",
+        role: "Frontend Web Developer",
         desc: "This portfolio project was created to strengthen my confidence in preparing for a professional career. It also serves as a platform to expand and apply my web development skills. Through this project, I explored new tools and refined my personal style.",
         tools: ['React','Typescript','CSS']
     }

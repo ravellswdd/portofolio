@@ -1,45 +1,78 @@
 import './Project.css'
-import { PROJECTS } from '.' 
+import { PROJECTS } from '.'
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import Modal from './Modal'
 
 function Project() {
+    const [open, setOpen] = useState(false)
+    const [selectedProj, setSelectedProj] = useState<any>(null)
+
+    useEffect(() => {
+      if (open) {
+        document.body.style.overflow = "hidden"
+      } else {
+        document.body.style.overflow = "auto"
+      }
+      return () => {
+        document.body.style.overflow = "auto"
+      }
+    }, [open])
+
     return (
-        <div id="Projects" className="projects">
-            <motion.h2
-            initial={{ y: -50, opacity: 0 }}
-            whileInView={{y: 0, opacity: 1}}
-            transition = {{duration: 1}}
-            className="proj-title">Projects</motion.h2>
-            <div>
-                {PROJECTS.map((project, index) => (
-                    <div key={index} className='proj-container'>
-                        <motion.div
-                        initial={{x: -100, opacity: 0}}
-                        whileInView={{ x: 0, opacity: 1}}
-                        transition={{ duration: 2.4}}
-                        className='image-container'>
-                            <img className='image' src={project.image} alt="proj images" />
-                        </motion.div> 
-                        <motion.div
-                        initial = {{x: 50, opacity: 0}}
-                        whileInView={{x: 0, opacity: 1}}
-                        transition={{duration: 2.4, ease: 'linear'}}
-                        className='box-container'>
-                            <a className='title-text' href={project.link} target="_blank" rel="noopener noreferrer">{project.title}</a>
-                            <p className='desc'>{project.desc}</p>
-                            <div className='tools-container'>
-                                {project.tools.map((item, index) => (
-                                <motion.p
-                                whileHover={{ scale: 1.2 }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                                key={index} className='tools'>{item}</motion.p>
-                                ))}
+        <div id="Projects" className="proj-border">
+            <motion.h2 
+              initial={{y: -50, opacity: 0}}
+              whileInView={{y:0, opacity: 1}}
+              transition={{duration: 1, ease: 'linear'}}
+              className='title'
+            >
+              Projects
+            </motion.h2>
+
+            <motion.div 
+            initial = {{x: -200, opacity: 0}}
+            whileInView={{x:0, opacity: 1}}
+            transition={{duration: 0.5, ease: 'linear'}}
+            className="swiper-container">
+                <div className="swiper-inner">
+                    {PROJECTS.map((proj, index) => (
+                        <motion.div 
+                          whileHover={{scale: 1.05}}
+                          transition={{duration: 0.5, ease: "easeOut"}}
+                          className="swiper-box" 
+                          key={index}
+                        >
+                            <img className="proj-img" src={proj.image} alt={proj.title} />
+                            <div className="proj-desc">
+                                <p className="proj-title">{proj.title}</p>
+                                <div className="lang-container">
+                                    {proj.tools.map((lang, i) => (
+                                        <p key={i}>{lang}</p>
+                                    ))}
+                                </div>
+                                <button 
+                                onClick={() => {
+                                setSelectedProj(proj)
+                                setOpen(true)
+                                }}
+                                className="button">View More</button>
                             </div>
                         </motion.div>
-                    
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </motion.div>
+            <Modal 
+              isOpen={open}
+              onClose={() => setOpen(false)}
+              title={selectedProj?.title || ""}
+              description={selectedProj?.desc || ""}
+              img={selectedProj?.image || ""}
+              role={selectedProj?.role || ""}
+              lang={selectedProj?.tools || ""}
+              type={selectedProj?.type || ""}
+              git={selectedProj?.git || ""}
+            />
         </div>
     )
 }

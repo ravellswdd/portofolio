@@ -22,18 +22,27 @@ function About() {
                     whileInView = {{ x: 0, opacity: 1}}
                     transition={{ duration: 1, ease: 'circOut'}}className='desc-container'>
                     <div className='fyi'>
-                        <div className='fyi-box'>
+                        <motion.div 
+                        whileHover={{scale: 1.05}}
+                        transition={{duration: 0.5, ease: "easeOut"}}
+                        className='fyi-box'>
                             <p className='fyi-head'>3+</p>
                             <p className='fyi-desc'>Experience<br />in Coding</p>
-                        </div>
-                        <div className='fyi-box'>
+                        </motion.div>
+                        <motion.div 
+                        whileHover={{scale: 1.05}}
+                        transition={{duration: 0.5, ease: "easeOut"}}
+                        className='fyi-box'>
                             <p className='fyi-head'>5+</p>
                             <p className='fyi-desc'>Programming<br />Language</p>
-                        </div>
-                        <div className='fyi-box'>
+                        </motion.div>
+                        <motion.div
+                        whileHover={{scale: 1.05}}
+                        transition={{duration: 0.5, ease: "easeOut"}}
+                        className='fyi-box'>
                             <p className='fyi-head'>10+</p>
                             <p className='fyi-desc'>AI Models<br />Trained</p>
-                        </div>
+                        </motion.div>
                     </div>
                     <div className='desc-about'>
                         <p

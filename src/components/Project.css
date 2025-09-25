@@ -1,71 +1,90 @@
-.projects {
-    border-bottom: 1px solid #262626;
+.proj-border {
+    width: 100%;
+    max-width: 1024px;
+    border: none;
+    padding-bottom: 4rem;
+}
+
+.swiper-container {
+    overflow-x: auto;        /* scroll horizontal */
+    overflow-y: hidden;     
+    -webkit-overflow-scrolling: touch;
+    padding-top: 0.5rem;
+    scrollbar-width: thin;
+}
+
+.swiper-container::-webkit-scrollbar {
+    height: 12px; /* tinggi scrollbar horizontal */
+    background-color: #f0f0f0; /* background track */
+}
+
+.swiper-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
     padding-bottom: 1rem;
-    padding-top: 5rem;
+    height: 500px;
+
 }
 
-.proj-title {
-    margin: 5rem 0;
-    text-align: center;
-    font-size: 2.25rem;
-}
-
-.proj-container {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 7rem;
-}
-
-.image-container {
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .image-container {
-    width: 25%;
-  }
-}
-
-.image {
-    width: 150;
-    height: 150;
-    border-radius: 100%;
-    margin-bottom: 1.5rem;
-}
-
-.box-container {
-    padding-top: 4rem;
-    max-width: 25rem;
-}
-
-.title-text {
-    margin-bottom: 1rem;
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: #ddd6fe;
-}
-
-.desc {
-    text-align: justify;
-    margin-bottom: 1rem;
-}
-
-.tools-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.tools {
-    margin-right: 0.5rem;
-    margin-top: 1rem;
-    border-radius: 0.25rem;
+.swiper-box {
+    border: 3px solid #262626;
     background-color: #171717;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #5b21b6;
-    width: fit-content;
+    padding: 1rem 1rem;
+    border-radius: 50px;
+    width: 100%;
+    max-width: 400px;
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.proj-img {
+    padding-top: 1rem;
+    border-radius: 50%;
+    width: 200px;
+}
+
+.proj-desc {
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.lang-container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 11px;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    
+}
+.lang-container p {
+    border: 3px solid #262626;
+    background-color: #171717;
+    padding: 0.3rem 0.5rem;
+    border-radius: 8px;
+}
+
+.button {
+  cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  font-size: 14px;
+  border: 3px solid transparent; /* default: transparan */
+  border-radius: 8px;            /* radius tetap */
+  transition: all 0.8s ease;     /* biar smooth */
+}
+
+.button:hover {
+  background-image: linear-gradient(to right, #f9a8d4, #64748b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  border-color:  #a78bfa; /* muncul border */
 }
