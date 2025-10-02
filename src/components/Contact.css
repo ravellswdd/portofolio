@@ -38,3 +38,26 @@
   align-items: center;
   color: white;
 }
+
+@media (max-width: 576px) {
+  .contact {
+    border:none;
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+    align-items: center;
+  }
+  .contact-title {
+    font-size: 6.5vw;
+  }
+
+  .quote-container h1 {
+    font-size: 3.5vw;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 3rem;
+  }
+}

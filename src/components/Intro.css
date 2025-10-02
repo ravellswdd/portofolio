@@ -57,10 +57,10 @@
 
 .cv-git-btn {
   display: flex;
-  justify-content: space-between; /* kasih jarak antara button */
+  justify-content: space-between; 
   align-items: center;
-  gap: 0.8rem; /* biar ada jarak tetap, lebih rapi */
-  width: 80%; /* biar ikut lebar parent */
+  gap: 0.8rem; 
+  width: 80%; 
 }
 
 
@@ -78,4 +78,62 @@
 
 .btn:hover {
     background-color: #555;
+}
+
+@media (max-width: 576px) {
+  .border {
+    width: 100%;
+    max-width: 100%;
+    padding-top: 20%;  /* padding atas relatif */
+    padding-bottom: 0;
+  }
+
+  .flexing-container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-content: center;
+    text-align: center;
+  }
+
+  .person {
+    padding-top: 2%;
+    font-size: 8vw;   /* pakai vw biar skala sesuai layar */
+    font-weight: 200;
+  }
+
+  .low-desc {
+    text-align: center;
+    font-size: 3.5vw;  /* skala teks relatif */
+    margin: 0 auto;
+    width: 70%;        /* teks lebih ramping */
+    white-space: normal;
+  }
+
+  .desc {
+    text-align: justify;   
+    width: 85%;           
+    margin: 0 auto;       
+    font-size: 3vw;       /* relatif ke lebar layar */
+    font-weight: 350;
+  }
+
+  .pic-image {
+    width: 200px;   /* gambar 40% dari lebar layar */
+    height: 200px; /* biar proporsional */
+  }
+
+  .cv-git-btn {
+    padding-top: 2%;
+    margin: 0 auto;
+    gap: 5%;
+    width: 90%;   /* biar tombol nggak kepenuhan */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    width: 30%;   /* tiap button 30% dari container */
+    min-width: 100px; /* jaga-jaga biar nggak terlalu kecil */
+  }
 }

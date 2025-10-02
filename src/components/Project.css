@@ -88,3 +88,40 @@
 
   border-color:  #a78bfa; /* muncul border */
 }
+
+
+@media (max-width: 576px) {
+
+    .proj-border {
+        width: 90%;
+        margin: 0 auto;
+        padding-bottom: 0;
+    }
+    
+    .swiper-inner {
+        height: 70%;
+        margin: 0 auto;
+        align-items: center;
+        width:100%;
+    }
+
+    .swiper-box {
+        width: 50%;
+        height: 50%;
+    }
+
+    .proj-img {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .proj-desc {
+        font-size: 3.5vw;
+    }
+
+    .lang-container {
+        display: none;
+    }
+
+
+}

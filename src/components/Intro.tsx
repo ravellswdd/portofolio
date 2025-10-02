@@ -24,13 +24,7 @@ function Intro() {
                     transition={{ duration: 0.7, delay: 0.3}}
                     className='low-desc'>
                         A Computer Science Undergraduate | BINUS University
-                    </motion.span>
-                    <motion.span 
-                    initial={{ x: -100, opacity: 0}} 
-                    animate={{ x: 0, opacity: 1}}
-                    transition={{ duration: 0.7, delay: 0.3}}
-                    className='low-desc'>
-                        Streaming: Intelligent Systems
+                        <br />Streaming: Intelligent Systems
                     </motion.span>
                     <motion.p 
                     initial={{ x: -100, opacity: 0}} 

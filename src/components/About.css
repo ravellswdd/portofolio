@@ -68,3 +68,46 @@
     text-align: justify;
     font-size: 15px;
 }
+
+@media (max-width: 576px) {
+
+    .title {
+        padding-top: 0;
+        font-size: 170%;
+    }
+
+    .image-flex {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .fyi {
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+    }
+
+    .fyi-box {
+        padding: 0.5rem 0.5rem;
+    }
+
+    .fyi-head {
+        font-size: 5vw;
+    }
+
+    .fyi-desc {
+        font-size: 3vw;
+    }
+
+    .desc-about {
+        font-size: 3vw;
+        max-width: 84%;
+        margin: 0 auto;
+    }
+    
+
+    .png {
+        width: 200px;
+        height: 200px;
+    }
+}

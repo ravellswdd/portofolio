@@ -1,13 +1,15 @@
 .nav-bar {
   position: fixed;
+  top: 0; 
+  left: 0;
+  right: 0;
   width: 100%;          
   max-width: 1024px;
-  margin: 0 auto;           /* biar center kalau ada max-width */
+  margin: 0 auto; 
   padding: 1.5rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1.5rem;
   z-index: 100;
 }
 
@@ -22,12 +24,39 @@
 }
 
 .icons {
- display: flex;
- padding-bottom: 1rem;
- gap: 3rem;
+  display: flex;
+  padding-bottom: 1rem;
+  gap: 3rem;
 }
 
-.icons p{
+.icons p {
   font-size: 17px;
   cursor: pointer;
 }
+
+/* Responsive HP */
+@media (max-width: 576px) {
+  .nav-bar {
+    margin: 0 auto;
+    max-width: 100%;    
+    display: flex;
+    justify-content: center; /* ini yang bikin isi nav ke tengah */
+  }
+
+  .image {
+    display: none;  /* ilangin logo pas HP */
+  }
+
+  .icons {
+    display: flex;
+    justify-content: center; /* biar konten icons di tengah */
+    gap: 10%;        
+  }
+
+  .icons p {
+    white-space: nowrap;
+    font-size: 65%;
+    text-align: center;
+  }
+}
+

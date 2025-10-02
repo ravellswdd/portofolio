@@ -58,9 +58,14 @@
 
 .border-icon {
     border-radius: 1rem;
-    border-width: 4px;
-    border-color: #262626;
-    padding: 1rem;
+    border: 4px solid #262626;
+    width: 6rem;   /* ukuran kotak konsisten */
+    height: 6rem;
+    display: flex;
+    align-items: center;   /* vertikal tengah */
+    justify-content: center; /* horizontal tengah */
+    padding: 0.5rem;   /* kasih ruang aman */
+    box-sizing: border-box;
 }
 
 .react-icon {
@@ -99,3 +104,46 @@
 /* python import dri luar jdi gaperlu pke styling css */
 /* mySQL import dri luar jdi gaperlu pke styling css */
 /* C import dri luar jdi gaperlu pke styling css */
+
+@media (max-width: 576px) {
+    .tech-border {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .tech-title {
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        font-size: 7vw;
+    }
+
+    .web-title {
+        font-size: 5vw;
+    }
+
+    .react-icon {
+        font-size: 7vw;
+    }
+
+     .html-icon {
+        font-size: 7vw;
+    }
+
+    .css-icon {
+        font-size: 7vw;
+    }
+
+    .javascript-icon {
+        font-size: 7vw;
+    }
+
+    .java-icon {
+        font-size: 7vw;
+    }
+
+    .border-icon {
+        width: 4rem;
+        height: 4rem;
+        padding: 0.3rem;
+    }
+}
