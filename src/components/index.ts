@@ -42,7 +42,7 @@ export const ORGANIZATION = [
     {
         role: "Vice Chairman of Student Council",
         org: "Ignatius Slamet Riyadi Highschool Karawang",
-        year: "Jan 2024 - Jan 2025"
+        year: "Jan 2022 - Jan 2023"
     },
     {
         role: "Activist of Art, Sport, and Internal Relations",
