@@ -3,7 +3,7 @@
 // (DESIGN.md 6.6): an open invitation, the email large, Copy email, the social links and a stub with
 // the Vels mark, a barcode and today's date as the ticket number. On phones the stub tears off under
 // the ticket.
-import { useRef, useState, type PointerEvent } from 'react'
+import { useLayoutEffect, useRef, useState, type PointerEvent } from 'react'
 import { AnimatePresence, motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from 'motion/react'
 import { ArrowUpRightIcon, CheckIcon, CopyIcon } from '@phosphor-icons/react'
 import { RoomSign } from '../components/ui/RoomSign'
@@ -155,8 +155,21 @@ export function VisitorDesk() {
 
 /** The page footer (its own landmark, outside <main>), continuing the visitor desk's wall. */
 export function SiteFooter() {
+  const ref = useRef<HTMLElement>(null)
+  // Publish the footer's height for the visitor desk's minimum height (see visitor-desk.css).
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const root = document.documentElement
+    const ro = new ResizeObserver(() => root.style.setProperty('--foot-h', `${el.offsetHeight}px`))
+    ro.observe(el)
+    return () => {
+      ro.disconnect()
+      root.style.removeProperty('--foot-h')
+    }
+  }, [])
   return (
-    <footer className="site-foot-wrap">
+    <footer ref={ref} className="site-foot-wrap">
       <div className="mx-auto max-w-[1320px] px-[var(--gut)]">
         <div className="site-foot">
           <span>&copy; 2026 {SITE.name}</span>

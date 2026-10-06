@@ -85,6 +85,9 @@ export function ExhibitDialog({ projects, index, onClose, onStep }: Props) {
         if (e.target === e.currentTarget) onClose()
       }}
       onKeyDown={onKeyDown}
+      // Lenis is paused while the card is open and would swallow every swipe and wheel; this lets
+      // the card itself scroll (phones, short screens).
+      data-lenis-prevent
       className="exhibit"
     >
       <AnimatePresence

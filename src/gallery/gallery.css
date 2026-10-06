@@ -24,6 +24,36 @@
     color: var(--ink-2);
   }
 
+  /* Laptops and desktops: after a jump to Work the whole room (with its arrows and placard) fits
+     on screen under the heading. --work-above is the section's top padding plus the heading. */
+  @media (min-width: 721px) {
+    .work {
+      --work-above: 302px;
+    }
+    /* (scoped to .work so it wins over the base .museum rule further down) */
+    .work .museum {
+      height: clamp(400px, calc(100svh - var(--nav-h) - 1px - var(--work-above) - 20px), 740px);
+      min-height: 0;
+    }
+  }
+  /* Phones: the same idea, so the room and its controls fit under the heading after a jump. */
+  @media (max-width: 720px) {
+    .work .museum {
+      height: clamp(380px, calc(100svh - var(--nav-h) - 1px - 288px - 16px), 600px);
+      min-height: 0;
+    }
+  }
+  /* shorter laptop screens: a tighter top so the room keeps a good size */
+  @media (min-width: 721px) and (max-height: 960px) {
+    .work {
+      --work-above: 236px;
+      padding-top: 40px;
+    }
+    .work-head {
+      margin-bottom: 16px;
+    }
+  }
+
   /* ---------- placard (carousel and HUD) ---------- */
   .pl-title {
     margin-bottom: 4px;
@@ -87,6 +117,27 @@
   }
   .museum:fullscreen {
     height: 100vh;
+  }
+  /* iPhone: no Fullscreen API for elements, so the room is expanded over the whole page instead */
+  .museum.is-expanded {
+    position: fixed;
+    inset: 0;
+    z-index: 950;
+    height: 100dvh;
+    min-height: 0;
+    background: #0b0d0c;
+  }
+  /* lift the gallery's room above the sticky nav and the later rooms while it is expanded */
+  html.museum-expanded #work {
+    position: relative;
+    z-index: 960;
+  }
+  /* the room fills the whole screen; the controls stay clear of the notch and the home bar */
+  .museum.is-expanded .hud-top {
+    top: calc(14px + env(safe-area-inset-top));
+  }
+  .museum.is-expanded .hud {
+    bottom: env(safe-area-inset-bottom);
   }
   .museum-loading {
     display: grid;

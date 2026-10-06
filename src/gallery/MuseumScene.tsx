@@ -6,6 +6,7 @@ import { ArrowLeftIcon, ArrowRightIcon, CornersInIcon, CornersOutIcon } from '@p
 import { PROJECT_COUNT, PROJECTS } from '../data/projects'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import { useReducedMotion } from '../motion/useReducedMotion'
+import { useLenis } from '../motion/lenis-context'
 import { useTheme } from '../theme/theme-context'
 import { createMuseum, type Museum } from './museum'
 import { Placard } from './Placard'
@@ -30,6 +31,7 @@ export default function MuseumScene({ active, onOpen, onFail }: Props) {
   const [full, setFull] = useState(false)
   // Callbacks can change between renders; the scene keeps calling the latest ones.
   const onOpenRef = useRef(onOpen)
+  const exitFullRef = useRef<() => void>(() => {})
   const onFailRef = useRef(onFail)
   useEffect(() => {
     onOpenRef.current = onOpen
@@ -55,7 +57,7 @@ export default function MuseumScene({ active, onOpen, onFail }: Props) {
           fine,
           onFocus: setFocus,
           onOpen: (i) => {
-            if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
+            exitFullRef.current()
             onOpenRef.current(i)
           },
           onInteract: () => setHintGone(true),
@@ -98,25 +100,59 @@ export default function MuseumScene({ active, onOpen, onFail }: Props) {
     museum.current?.setActive(active)
   }, [active, loaded])
 
+  // Full screen: the real Fullscreen API where the browser allows it on an element (desktop, iPad,
+  // Android). iPhone Safari only allows it for video, so there the room is expanded to fill the
+  // screen instead ("expanded"), with the page held still behind it.
+  const [expanded, setExpanded] = useState(false)
+  const lenis = useLenis()
   useEffect(() => {
     const sync = () => setFull(document.fullscreenElement === boxRef.current)
     document.addEventListener('fullscreenchange', sync)
     return () => document.removeEventListener('fullscreenchange', sync)
   }, [])
-  const toggleFull = () => {
+  useEffect(() => {
+    if (!expanded) return
+    lenis?.stop()
+    const html = document.documentElement
+    const prev = html.style.overflow
+    html.style.overflow = 'hidden'
+    html.classList.add('museum-expanded')
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setExpanded(false)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      html.style.overflow = prev
+      html.classList.remove('museum-expanded')
+      window.removeEventListener('keydown', onKey)
+      lenis?.start()
+    }
+  }, [expanded, lenis])
+  const exitFull = () => {
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
-    else boxRef.current?.requestFullscreen?.().then(() => boxRef.current?.focus())
+    setExpanded(false)
   }
+  exitFullRef.current = exitFull
+  const toggleFull = () => {
+    const box = boxRef.current
+    if (!box) return
+    if (document.fullscreenElement || expanded) return exitFull()
+    if (document.fullscreenEnabled && box.requestFullscreen) {
+      box
+        .requestFullscreen()
+        .then(() => box.focus())
+        .catch(() => setExpanded(true))
+    } else setExpanded(true)
+  }
+  const isFull = full || expanded
 
   const open = (i: number) => {
-    if (document.fullscreenElement) document.exitFullscreen().catch(() => {})
+    exitFull()
     onOpen(i)
   }
 
   return (
     <div
       ref={boxRef}
-      className="museum"
+      className={`museum${expanded ? ' is-expanded' : ''}`}
       data-cursor="Drag"
       tabIndex={0}
       role="application"
@@ -133,12 +169,12 @@ export default function MuseumScene({ active, onOpen, onFail }: Props) {
             : 'Swipe to look · Tap the floor to walk · Tap a painting'}
         </span>
         <button type="button" className="round" onClick={toggleFull}>
-          {full ? (
+          {isFull ? (
             <CornersInIcon size={18} weight="bold" aria-hidden />
           ) : (
             <CornersOutIcon size={18} weight="bold" aria-hidden />
           )}
-          <span className="sr-only">{full ? 'Exit full screen' : 'Full screen'}</span>
+          <span className="sr-only">{isFull ? 'Exit full screen' : 'Full screen'}</span>
         </button>
       </div>
       <div className="hud">

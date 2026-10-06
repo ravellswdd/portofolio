@@ -17,8 +17,8 @@ export function scrollToHash(hash: string, lenis: Lenis | null) {
     el.focus({ preventScroll: true })
   }
 
-  // The 80px clearance under the sticky nav comes from `scroll-padding-top` on <html>, which both
-  // native scrolling and Lenis honour, so no extra offset here.
+  // The clearance under the sticky nav comes from `scroll-padding-top` on <html> (the nav's exact
+  // height), which both native scrolling and Lenis honour, so no extra offset here.
   if (lenis) lenis.scrollTo(el, { onComplete: focus })
   else {
     el.scrollIntoView({ block: 'start' })

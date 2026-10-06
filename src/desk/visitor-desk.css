@@ -4,6 +4,9 @@
  */
 @layer components {
   .desk {
+    /* The last room is at least a screen tall (less the nav and the footer, whose height SiteFooter
+       publishes as --foot-h), so a jump to Contact can bring its top right up under the nav. */
+    min-height: calc(100svh - var(--nav-h) - 1px - var(--foot-h, 0px));
     padding-block: clamp(80px, 12vw, 150px) 0;
     border-top: 1px solid var(--rule);
     background: var(--wall);

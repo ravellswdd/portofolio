@@ -63,6 +63,8 @@ export function MobileMenu({ active }: { active: RoomId | null }) {
 
       <dialog
         ref={dialogRef}
+        // the page's smooth scroll is paused while the menu is open: let the sheet scroll itself
+        data-lenis-prevent
         aria-labelledby={titleId}
         onCancel={(e) => {
           // Esc: run the exit animation instead of vanishing.

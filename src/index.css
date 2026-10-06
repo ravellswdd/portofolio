@@ -15,8 +15,9 @@
 
 @layer base {
   html {
-    /* Anchor jumps (and focused elements) clear the sticky nav. Lenis handles the smooth part. */
-    scroll-padding-top: calc(var(--nav-h) + 16px);
+    /* Anchor jumps (and focused elements) land exactly under the sticky nav (its height plus its
+       1px bottom rule), so each room starts flush against it. Lenis handles the smooth part. */
+    scroll-padding-top: calc(var(--nav-h) + 1px);
     -webkit-text-size-adjust: 100%;
   }
 
