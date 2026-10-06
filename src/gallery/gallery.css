@@ -1,0 +1,736 @@
+/*
+ * Room 3: the gallery (DESIGN.md 6.5, preview.html "room 3"). The 3D room with its HUD, the
+ * coverflow carousel of framed paintings, the shared placard and the exhibit dialog.
+ */
+@layer components {
+  .work {
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
+    padding-block: clamp(56px, 8vw, 104px) clamp(48px, 6vw, 80px);
+    background: var(--wall-2);
+  }
+  .work-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .work-intro {
+    max-width: 46ch;
+    margin-top: 10px;
+    color: var(--ink-2);
+  }
+
+  /* ---------- placard (carousel and HUD) ---------- */
+  .pl-title {
+    margin-bottom: 4px;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .pl-muted {
+    color: var(--ink-2);
+  }
+  .pl-enter {
+    margin-top: 10px;
+    padding: 6px 0;
+    border: 0;
+    background: none;
+    font: 600 0.92rem var(--font-body);
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .pl-enter:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  /* ---------- the 3D room ---------- */
+  .museum {
+    position: relative;
+    height: min(80vh, 740px);
+    min-height: 440px;
+    overflow: hidden;
+    background: #0b0d0c;
+    outline: none;
+  }
+  .museum:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .museum canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+  .museum.is-dragging canvas {
+    cursor: grabbing;
+  }
+  /* lens vignette (cheaper here than as a render pass) */
+  .museum::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(ellipse 75% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.32));
+  }
+  .museum .hud,
+  .museum .hud-top {
+    z-index: 2;
+  }
+  .museum:fullscreen {
+    height: 100vh;
+  }
+  .museum-loading {
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: #f2f3ef;
+  }
+  .museum > .museum-loading {
+    position: absolute;
+    inset: 0;
+  }
+  .crosshair {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background: rgba(242, 243, 239, 0.7);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+  }
+  .hud-top {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 10px;
+    pointer-events: none;
+  }
+  .hud {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px;
+    pointer-events: none;
+  }
+  .hud > *,
+  .hud-top > * {
+    pointer-events: auto;
+  }
+  .keys {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(11, 13, 12, 0.6);
+    backdrop-filter: blur(8px);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #f2f3ef;
+    transition: opacity 0.6s;
+  }
+  .keys.is-gone {
+    opacity: 0;
+  }
+  .hud-card {
+    width: 100%;
+    max-width: 340px;
+    min-width: 0;
+    padding: 14px 18px;
+    background: var(--plinth);
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .round {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(242, 243, 239, 0.45);
+    border-radius: 999px;
+    background: rgba(11, 13, 12, 0.6);
+    backdrop-filter: blur(8px);
+    color: #f2f3ef;
+    cursor: pointer;
+    transition:
+      background var(--dur-fast),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .round:hover {
+    background: rgba(11, 13, 12, 0.85);
+  }
+  .round:active {
+    transform: scale(0.94);
+  }
+
+  /* ---------- carousel ---------- */
+  .carousel {
+    position: relative;
+    padding-top: 12px;
+  }
+  .stage {
+    --pw: clamp(200px, 22vw, 290px);
+    --gap: 0.78;
+    position: relative;
+    height: calc(var(--pw) * 1.25 + 110px);
+    perspective: 1400px;
+    perspective-origin: 50% 35%;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+  }
+  .stage.is-drag {
+    cursor: grabbing;
+  }
+  .arc-ring {
+    position: absolute;
+    left: 50%;
+    top: 36px;
+    width: var(--pw);
+    margin-left: calc(var(--pw) / -2);
+    transform-style: preserve-3d;
+  }
+  /* --o offset from centre, --a = min(|o|,1), --a2 = min(|o|,2.2), --far = max(|o|-1,0), --s sign */
+  .painting {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: var(--pw);
+    aspect-ratio: 4 / 5;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transform: translate3d(
+        calc(var(--s) * (var(--a) * var(--pw) * (var(--gap) + 0.32) + var(--far) * var(--pw) * var(--gap) * 0.7)),
+        0,
+        calc(var(--a2) * -210px)
+      )
+      rotateY(calc(var(--s) * var(--a) * -38deg));
+    transition:
+      filter 0.45s,
+      opacity 0.45s;
+  }
+  .stage.is-flat .painting {
+    transform: translate3d(calc(var(--o) * var(--pw) * 1.08), 0, 0);
+  }
+  .painting.is-dim {
+    filter: brightness(0.66) saturate(0.8);
+  }
+  .painting.is-gone {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .painting:focus-visible {
+    outline: none;
+  }
+  .painting:focus-visible .frame {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+  }
+  /* brass picture lamp on a short arm above each frame; only the centre one is on */
+  .painting .lamp {
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    z-index: 2;
+    width: 46%;
+    height: 11px;
+    translate: -50% 0;
+    border-radius: 6px 6px 3px 3px;
+    background: linear-gradient(180deg, #e2c58b, #a8803f 60%, #6d5126);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  }
+  .painting .lamp::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 3px;
+    height: 20px;
+    translate: -50% 0;
+    background: linear-gradient(90deg, #6d5126, #d9bb7f, #6d5126);
+  }
+  /* the lamp's lit underside */
+  .painting .lamp::after {
+    content: '';
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: -1px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff4dc;
+    box-shadow: 0 2px 8px 2px rgba(255, 228, 170, 0.75);
+    opacity: 0;
+    transition: opacity var(--dur-slow) var(--ease-out);
+  }
+  .painting.is-lit .lamp::after {
+    opacity: 1;
+  }
+
+  /* walnut moulding: lit from above, bevelled inner and outer edges, and a raised fillet */
+  .painting .frame {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    padding: 5.2%;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 45%),
+      linear-gradient(180deg, var(--frame-hi), var(--frame) 30%, color-mix(in srgb, var(--frame) 75%, #000));
+    box-shadow:
+      /* no highlight along the top edge: the lamp sits there */
+      inset 2px 0 0 rgba(255, 255, 255, 0.1),
+      inset -2px -2px 0 rgba(0, 0, 0, 0.45),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+      12px 28px 34px -16px var(--shadow),
+      4px 10px 12px -6px rgba(0, 0, 0, 0.28);
+  }
+  .painting .frame::before {
+    content: '';
+    position: absolute;
+    inset: calc(5.2% - 4px);
+    z-index: 1;
+    pointer-events: none;
+    border: 4px solid transparent;
+    border-image: linear-gradient(135deg, #8c6f4b, #4b3a29 50%, #2a201a) 1;
+  }
+  /* bottom-weighted mat, shaded where the moulding overhangs it */
+  .painting .mat {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 11% 11% 15%;
+    background:
+      repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.012) 0 1px, transparent 1px 3px),
+      var(--mat);
+    box-shadow:
+      inset 0 5px 8px -4px rgba(0, 0, 0, 0.4),
+      inset 4px 0 6px -4px rgba(0, 0, 0, 0.25);
+  }
+  /* bevel cut: the white core of the board, lit on the top and left */
+  .painting .bevel {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    background: linear-gradient(135deg, #ffffff, #efece3 55%, #d9d5c9);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+  .painting img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 0.7s var(--ease-out);
+  }
+  .painting.is-lit:hover img {
+    scale: 1.03;
+  }
+  /* glass: one reflection band across the whole frame */
+  .painting .glass {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(112deg, transparent 38%, rgba(255, 255, 255, 0.16) 46%, rgba(255, 255, 255, 0.04) 52%, transparent 58%);
+  }
+  /* the lamp's warm light falling down over the frame and the top of the mat */
+  .painting .wash {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 70% 55% at 50% -6%, rgba(255, 236, 196, 0.5), transparent 70%);
+    mix-blend-mode: soft-light;
+    opacity: 0;
+    transition: opacity var(--dur-slow) var(--ease-out);
+  }
+  .painting.is-lit .wash {
+    opacity: 1;
+  }
+  .placard-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .placard-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .placard {
+    width: 100%;
+    max-width: 380px;
+    min-width: 0;
+    padding: 18px 22px;
+    background: var(--plinth);
+    box-shadow: 0 12px 30px -18px var(--shadow);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .placard p:not(.pl-muted) {
+    color: var(--ink);
+  }
+  .ctrl {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition:
+      background var(--dur-fast),
+      color var(--dur-fast),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .ctrl:hover {
+    background: var(--ink);
+    color: var(--wall-2);
+  }
+  .ctrl:active {
+    transform: scale(0.97);
+  }
+  .count {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-2);
+  }
+
+  /* ---------- exhibit dialog ---------- */
+  dialog.exhibit {
+    margin: auto;
+    width: 100%;
+    max-width: min(1040px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    padding: 0;
+    border: 0;
+    overflow: visible;
+    background: transparent;
+    color: var(--ink);
+  }
+  dialog.exhibit::backdrop {
+    background: rgba(10, 12, 11, 0.62);
+    backdrop-filter: blur(4px);
+  }
+  .ex-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100dvh - 32px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    background: var(--plinth);
+    box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.6);
+  }
+  .ex-entry {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+    flex: 1;
+  }
+
+  /* the work on a lit wall plate: a pool of light from above, a thin black frame, a plate number */
+  .ex-wall {
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    place-items: center;
+    gap: 22px;
+    padding: clamp(28px, 4vw, 48px) clamp(24px, 3.4vw, 44px) 22px;
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--wall), var(--wall-2));
+    border-right: 1px solid var(--rule);
+  }
+  .ex-spot {
+    position: absolute;
+    inset: -30% -10% 20%;
+    pointer-events: none;
+    background: radial-gradient(48% 52% at 50% 46%, var(--spot), transparent 70%);
+    opacity: 0.85;
+  }
+  .ex-piece {
+    position: relative;
+    width: min(100%, 330px);
+  }
+  .ex-frame {
+    display: block;
+    padding: 7%;
+    background: var(--mat);
+    box-shadow:
+      0 0 0 6px #1b1c1b,
+      0 0 0 7px rgba(255, 255, 255, 0.08),
+      0 26px 40px -18px rgba(0, 0, 0, 0.55),
+      0 50px 70px -40px rgba(0, 0, 0, 0.4);
+  }
+  .ex-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  }
+  .ex-plate {
+    position: relative;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100%, 330px);
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .ex-live {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+    color: var(--ink);
+  }
+  .ex-live i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  /* the object record */
+  .ex-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-width: 0;
+    padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 48px) clamp(24px, 3vw, 36px);
+  }
+  .ex-kicker {
+    padding-right: 52px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .ex-body h3 {
+    margin-top: -6px;
+    font-size: clamp(2rem, 3.8vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+  .ex-desc {
+    max-width: 52ch;
+    color: var(--ink-2);
+    text-wrap: pretty;
+  }
+  .ex-record {
+    margin: 2px 0 0;
+    border-top: 1px solid var(--rule);
+  }
+  .ex-record > div {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ex-record dt {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .ex-record dd {
+    margin: 0;
+    font-weight: 500;
+  }
+  .ex-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: -2px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ex-chips li {
+    padding: 3px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-size: 0.86rem;
+    font-weight: 500;
+  }
+  .ex-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  /* walk to the neighbouring exhibits */
+  .ex-nav {
+    display: grid;
+    /* same split as the entry above, so the divider continues the wall plate's edge */
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+    border-top: 1px solid var(--rule);
+  }
+  .ex-nav button {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    align-items: center;
+    min-height: 64px;
+    padding: 12px clamp(20px, 3vw, 32px);
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .ex-nav button + button {
+    grid-template-columns: 1fr auto;
+    border-left: 1px solid var(--rule);
+    text-align: right;
+  }
+  .ex-nav button:hover {
+    background: var(--wall);
+  }
+  .ex-nav button svg {
+    grid-row: span 2;
+    transition: transform 0.25s var(--ease-out);
+  }
+  .ex-nav button + button svg {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .ex-nav button:hover svg {
+    transform: translateX(-3px);
+  }
+  .ex-nav button + button:hover svg {
+    transform: translateX(3px);
+  }
+  .ex-nav-k {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .ex-nav-t {
+    font-family: var(--font-display);
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ex-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--plinth);
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform 0.25s var(--ease-out), background-color 0.2s;
+  }
+  .ex-close:hover {
+    transform: rotate(90deg);
+    background: var(--wall);
+  }
+
+  @media (max-width: 720px) {
+    .ex-entry {
+      grid-template-columns: 1fr;
+    }
+    .ex-wall {
+      gap: 16px;
+      padding: 56px 24px 16px;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .ex-piece,
+    .ex-plate {
+      width: min(100%, 210px);
+    }
+    .ex-nav {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ex-nav-t {
+      font-size: 0.9rem;
+    }
+    .placard-row {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 10px;
+    }
+    .ctrl {
+      width: 44px;
+      height: 44px;
+    }
+    .museum {
+      height: min(72vh, 600px);
+    }
+    .hud {
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    .hud-card {
+      order: -1;
+      max-width: none;
+      flex-basis: 100%;
+      padding: 10px 14px;
+      font-size: 0.74rem;
+    }
+    /* keep the painting visible on phones: name, role and the open link only */
+    .hud-card > p:not(.pl-muted),
+    .hud-card > .pl-muted + .pl-muted {
+      display: none;
+    }
+    .hud-card .pl-title {
+      font-size: 1.1rem;
+    }
+    .hud-card .pl-enter {
+      margin-top: 2px;
+    }
+    .hud .round:last-child {
+      margin-left: auto;
+    }
+  }
+}

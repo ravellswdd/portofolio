@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Full-size original photos: they contain GPS location data. Kept locally, never committed.
+assets-src/originals/

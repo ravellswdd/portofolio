@@ -1,0 +1,228 @@
+/*
+ * Visitor desk (DESIGN.md 6.6, preview.html "visitor desk"): the admission ticket with its
+ * perforated stub, the footer and the copy toast.
+ */
+@layer components {
+  .desk {
+    padding-block: clamp(80px, 12vw, 150px) 0;
+    border-top: 1px solid var(--rule);
+    background: var(--wall);
+  }
+  .desk-h {
+    max-width: 22ch;
+    margin-bottom: 40px;
+    font-size: clamp(2rem, 4.4vw, 3.6rem);
+    text-wrap: balance;
+  }
+
+  .ticket-stage {
+    max-width: 1000px;
+    perspective: 1200px;
+  }
+  /* the stub notches: two half-circle bites where the perforation meets the edges */
+  .ticket {
+    --stub: 200px;
+    --bite: 14px;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--stub);
+    background: var(--plinth);
+    box-shadow: 0 30px 60px -36px var(--shadow);
+    mask:
+      radial-gradient(circle var(--bite) at calc(100% - var(--stub)) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle var(--bite) at calc(100% - var(--stub)) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .t-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+    padding: clamp(22px, 4vw, 44px);
+  }
+  .t-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .t-email {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4.6vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color var(--dur-fast);
+  }
+  .t-email:hover {
+    color: var(--accent);
+  }
+  .t-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 28px;
+  }
+  .t-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    padding: 0 22px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    background: var(--accent);
+    font: 600 0.98rem var(--font-body);
+    color: var(--accent-ink);
+    cursor: pointer;
+    transition:
+      filter var(--dur-fast),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .t-copy:hover {
+    filter: brightness(1.1);
+  }
+  .t-copy:active {
+    transform: scale(0.97);
+  }
+  .t-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .t-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 44px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color var(--dur-fast);
+  }
+  .t-links a:hover {
+    color: var(--accent);
+  }
+
+  /* stub, behind a dashed perforation */
+  .t-stub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 24px 20px;
+    border-left: 2px dashed var(--rule);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .t-stub b {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    letter-spacing: -0.04em;
+    text-transform: none;
+    color: var(--ink);
+  }
+  .t-barcode {
+    width: 100%;
+    height: 46px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--ink) 0 2px,
+      transparent 2px 4px,
+      var(--ink) 4px 5px,
+      transparent 5px 8px,
+      var(--ink) 8px 11px,
+      transparent 11px 12px
+    );
+  }
+  .t-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+  }
+
+  .site-foot-wrap {
+    padding-top: clamp(64px, 9vw, 110px);
+    background: var(--wall);
+  }
+  .site-foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--rule);
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+  .site-foot a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .site-foot a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .toast-slot {
+    position: fixed;
+    left: 50%;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    z-index: 40;
+    translate: -50% 0;
+    pointer-events: none;
+  }
+  .toast {
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: var(--ink);
+    font-size: 0.9rem;
+    color: var(--wall);
+    white-space: nowrap;
+  }
+
+  /* phones: the stub tears off under the ticket, notches move to the sides */
+  @media (max-width: 720px) {
+    .ticket {
+      grid-template-columns: 1fr;
+      mask:
+        radial-gradient(circle var(--bite) at 0 calc(100% - 96px), #0000 98%, #000) left / 51% 100% no-repeat,
+        radial-gradient(circle var(--bite) at 100% calc(100% - 96px), #0000 98%, #000) right / 51% 100% no-repeat;
+    }
+    .t-stub {
+      flex-direction: row;
+      height: 96px;
+      padding: 16px 20px;
+      border-top: 2px dashed var(--rule);
+      border-left: 0;
+    }
+    .t-stub b {
+      font-size: 1.8rem;
+    }
+    .t-barcode {
+      width: 96px;
+      flex: none;
+    }
+    .t-no {
+      display: none;
+    }
+  }
+}

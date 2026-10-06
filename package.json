@@ -1,5 +1,5 @@
 {
-  "name": "learn-react-app",
+  "name": "rvl-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,28 +7,39 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource/hanken-grotesk": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.1.10",
-    "framer-motion": "^12.18.1",
+    "lenis": "^1.3.26",
+    "motion": "^14.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-icons": "^5.5.0",
-    "swiper": "^12.0.2",
-    "tailwindcss": "^4.1.10"
+    "simple-icons": "^16.34.0",
+    "tailwindcss": "^4.1.10",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "sharp": "^0.35.5",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
+  },
+  "overrides": {
+    "rollup": "4.63.6"
   }
 }

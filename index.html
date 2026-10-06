@@ -2,12 +2,63 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="RvL.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RvL's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ECEEEA" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1110" />
+    <title>Ravellino Suwandi | RvL's Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Ravellino Suwandi, a developer and Intelligent Systems student at BINUS who builds AI-powered systems with Python and LLM APIs, and the React and TypeScript interfaces on top."
+    />
+    <meta name="author" content="Ravellino Suwandi" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Open Graph and Twitter cards. The canonical/og:url and absolute image URLs are added at
+         build time from SITE_URL (or Vercel's production URL); see vite.config.ts. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RvL's Portfolio" />
+    <meta property="og:title" content="Ravellino Suwandi | RvL's Portfolio" />
+    <meta
+      property="og:description"
+      content="Developer and AI enthusiast. Python systems on LLM APIs, with React and TypeScript on top."
+    />
+    <meta property="og:image" content="%SITE_URL%/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ravellino Suwandi, RvL's Portfolio: a framed portrait on a gallery wall" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Hall artwork (LCP): same srcset/sizes as <Picture image="bagibagi"> in EntranceHall -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      fetchpriority="high"
+      imagesrcset="/img/bagibagi-400.avif 400w, /img/bagibagi-800.avif 800w, /img/bagibagi-1200.avif 1200w"
+      imagesizes="(max-width: 900px) min(62vw, 266px), clamp(187px, 19.5vw, 296px)"
+    />
+    <script>
+      // Set the gallery lighting before the bundle loads so there is no flash of the wrong theme.
+      // No attribute = follow the system (prefers-color-scheme in tokens.css).
+      try {
+        var t = localStorage.getItem('rvl-theme')
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t)
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <!-- Loading screen, painted from the HTML so the page is never blank while the scripts load.
+         hall/Loader.tsx draws the same panel on top, then removes this one. -->
+    <div id="boot" class="loader" aria-hidden="true">
+      <svg class="loader-edge" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 0 L100 0 L100 0 Q50 10 0 0 Z" /></svg>
+      <div class="loader-mark">
+        <span class="loader-rvl">RvL&rsquo;s</span>
+        <span class="loader-word"><span class="loader-word-in loader-word-sizer">Exhibition</span><span class="loader-word-in"><span class="inline-block">P</span><span class="inline-block">o</span><span class="inline-block">r</span><span class="inline-block">t</span><span class="inline-block">f</span><span class="inline-block">o</span><span class="inline-block">l</span><span class="inline-block">i</span><span class="inline-block">o</span></span></span>
+      </div>
+      <div class="loader-foot"><span>Opening the exhibition</span><span class="loader-count">000</span></div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

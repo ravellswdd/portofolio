@@ -1,0 +1,328 @@
+/*
+ * The collection (DESIGN.md 6.3, restyled after the textile hall reference): each language or
+ * tool is a printed cloth banner on a wooden batten, hung by two wires from a ceiling rail.
+ * Banner.tsx owns the motion (unroll, sway, swing, scroll lean); this file draws the parts.
+ * --drop is the wire length, --c the brand colour, --fold the fold-light offset while swinging.
+ */
+@layer components {
+  .banners {
+    --gap: clamp(16px, 2.6vw, 40px);
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+    column-gap: var(--gap);
+    row-gap: clamp(40px, 5vw, 72px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    padding-top: 7px;
+    perspective: 1100px;
+  }
+  .banner.is-centre {
+    grid-column: 3;
+    grid-row: 1;
+    z-index: 1;
+  }
+
+  /* ceiling rail: each banner draws its own stretch, so a row reads as one continuous track */
+  .b-rail {
+    position: absolute;
+    top: 0;
+    left: calc(var(--gap) / -2);
+    right: calc(var(--gap) / -2);
+    height: 7px;
+    border-radius: 1px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--rail) 60%, #fff) 0 1px,
+      var(--rail) 1px 4px,
+      color-mix(in srgb, var(--rail) 70%, #000) 4px
+    );
+    box-shadow: 0 3px 6px -2px var(--shadow);
+  }
+
+  /* everything that hangs: pivots on the rail */
+  .b-hang {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: var(--drop);
+    container-type: inline-size;
+    transform-origin: 50% 0;
+    will-change: transform;
+  }
+  .is-centre .b-hang {
+    width: calc(100% + var(--gap) * 0.9);
+    padding-top: 12px;
+  }
+
+  /* two steel wires from the rail to the batten, with a clamp where they meet the rail */
+  .b-wires {
+    position: absolute;
+    top: 0;
+    left: 13%;
+    right: 13%;
+    height: calc(var(--drop) + 4px);
+    background:
+      linear-gradient(var(--steel-lo), var(--steel)) 0 0 / 1px 100% no-repeat,
+      linear-gradient(var(--steel-lo), var(--steel)) 100% 0 / 1px 100% no-repeat;
+  }
+  .b-wires::before,
+  .b-wires::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    width: 5px;
+    height: 6px;
+    border-radius: 1px;
+    background: linear-gradient(90deg, var(--steel-lo), var(--steel-hi), var(--steel-lo));
+  }
+  .b-wires::before {
+    left: -2px;
+  }
+  .b-wires::after {
+    right: -2px;
+  }
+
+  /* wooden batten the cloth is wrapped over, with turned end knobs */
+  .b-rod {
+    position: relative;
+    z-index: 1;
+    width: 96%;
+    height: 9px;
+    border-radius: 5px;
+    background: linear-gradient(
+      180deg,
+      var(--rod-hi) 0%,
+      var(--rod) 45%,
+      color-mix(in srgb, var(--rod) 65%, #000) 100%
+    );
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+  }
+  .b-rod::before,
+  .b-rod::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--rod-hi), var(--rod) 55%, color-mix(in srgb, var(--rod) 55%, #000));
+  }
+  .b-rod::before {
+    left: -6px;
+  }
+  .b-rod::after {
+    right: -6px;
+  }
+
+  /* ---------- the cloth ---------- */
+  .b-cloth {
+    --hem: 10px;
+    --fold: 0px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 86%;
+    aspect-ratio: 1 / 2.05;
+    margin-top: -4px;
+    padding: 12cqw 9cqw 14cqw;
+    color: var(--fabric-ink);
+    text-align: center;
+    background:
+      /* header and footer bands woven in the brand colour */
+      linear-gradient(var(--c), var(--c)) 0 0 / 100% 2.6cqw no-repeat,
+      linear-gradient(var(--c), var(--c)) 0 100% / 100% 2.6cqw no-repeat,
+      /* weave */
+      repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.025) 0 1px, transparent 1px 3px),
+      /* lattice printed faintly in the brand colour */
+      repeating-linear-gradient(45deg, color-mix(in srgb, var(--c) 10%, transparent) 0 1px, transparent 1px 13px),
+      repeating-linear-gradient(-45deg, color-mix(in srgb, var(--c) 10%, transparent) 0 1px, transparent 1px 13px),
+      linear-gradient(180deg, var(--fabric), var(--fabric-2));
+    box-shadow:
+      0 40px 40px -36px var(--shadow),
+      0 2px 3px rgba(0, 0, 0, 0.12);
+  }
+  .is-centre .b-cloth {
+    aspect-ratio: 1 / 1.9;
+  }
+  /* double ruled border in the brand colour */
+  .b-cloth::before {
+    content: '';
+    position: absolute;
+    inset: 5.6cqw 4.7cqw;
+    pointer-events: none;
+    border: 1.5px solid color-mix(in srgb, var(--c) 85%, transparent);
+    box-shadow:
+      inset 0 0 0 3px transparent,
+      inset 0 0 0 4px color-mix(in srgb, var(--c) 55%, transparent);
+  }
+  /* fringe under the hem */
+  .b-cloth::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 2%;
+    right: 2%;
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--fabric-2) 70%, var(--c)) 0 1.5px,
+      transparent 1.5px 4px
+    );
+    mask: linear-gradient(#000 60%, transparent);
+  }
+
+  /* folds and the spotlight on the cloth; the folds drift as it swings */
+  .b-light {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 85% 38% at 50% 0%, var(--fabric-light), transparent 75%),
+      linear-gradient(
+        90deg,
+        var(--fabric-shade) 0%,
+        transparent 9%,
+        rgba(255, 255, 255, 0.14) 22%,
+        transparent 32%,
+        rgba(0, 0, 0, 0.05) 50%,
+        transparent 62%,
+        rgba(255, 255, 255, 0.12) 76%,
+        transparent 88%,
+        var(--fabric-shade) 100%
+      );
+    background-size:
+      100% 100%,
+      120% 100%;
+    background-position:
+      0 0,
+      calc(50% + var(--fold)) 0;
+  }
+  .b-cloth > :not(.b-light, .b-weight) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .b-acc {
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 4.8cqw, 0.85rem);
+    color: var(--fabric-ink-2);
+  }
+  /* round woven medallion holding the logo */
+  .b-medal {
+    display: flex;
+    gap: 6%;
+    align-items: center;
+    justify-content: center;
+    width: 46cqw;
+    aspect-ratio: 1;
+    margin: 7cqw 0 6.5cqw;
+    border-radius: 50%;
+    background: var(--fabric);
+    color: var(--fabric-ink);
+    box-shadow:
+      0 0 0 1.5px var(--c),
+      0 0 0 5px var(--fabric),
+      0 0 0 6px color-mix(in srgb, var(--c) 55%, transparent);
+  }
+  .b-medal svg {
+    width: 56%;
+    height: 56%;
+  }
+  .b-name {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 11.5cqw, 2.6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    overflow-wrap: anywhere;
+  }
+  .b-kind {
+    margin-top: 2.6cqw;
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 4.8cqw, 0.85rem);
+    line-height: 1.35;
+    color: var(--fabric-ink-2);
+  }
+  .b-used {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 4.8cqw, 0.85rem);
+    line-height: 1.4;
+  }
+  .b-used-k {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 0.92em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fabric-ink-2);
+  }
+
+  /* weighted bottom batten, sewn into the hem */
+  .b-weight {
+    position: absolute;
+    top: calc(100% - var(--hem));
+    left: -3%;
+    right: -3%;
+    z-index: 2;
+    height: var(--hem);
+    border-radius: 5px;
+    background: linear-gradient(
+      180deg,
+      var(--rod-hi) 0%,
+      var(--rod) 45%,
+      color-mix(in srgb, var(--rod) 65%, #000) 100%
+    );
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.22);
+  }
+
+  /* soft shadow on the floor under each banner */
+  .b-shadow {
+    width: 70%;
+    height: 16px;
+    margin-top: 26px;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--shadow), transparent);
+  }
+
+  @media (max-width: 900px) {
+    .banners {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .banner.is-centre {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(52%, 280px);
+    }
+    /* the centre banner gets its own stretch of rail across the room */
+    .is-centre .b-rail {
+      left: -50vw;
+      right: -50vw;
+    }
+    .is-centre .b-hang {
+      width: 100%;
+    }
+  }
+  @media (max-width: 560px) {
+    .banners {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .banner.is-centre {
+      width: min(62%, 240px);
+    }
+  }
+}

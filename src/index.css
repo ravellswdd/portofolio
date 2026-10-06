@@ -1,6 +1,205 @@
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@layer theme, base, components, utilities;
+@import 'tailwindcss';
 
-:root {
-    font-family: "Inter", sans-serif;
+/* Self-hosted fonts (OFL). Latin subsets only keep the payload small. */
+@import '@fontsource-variable/bricolage-grotesque/opsz.css';
+@import '@fontsource/hanken-grotesk/latin-400.css';
+@import '@fontsource/hanken-grotesk/latin-400-italic.css';
+@import '@fontsource/hanken-grotesk/latin-500.css';
+@import '@fontsource/hanken-grotesk/latin-600.css';
+@import '@fontsource/ibm-plex-mono/latin-400.css';
+@import '@fontsource/ibm-plex-mono/latin-500.css';
+
+@import 'lenis/dist/lenis.css';
+@import './theme/tokens.css';
+
+@layer base {
+  html {
+    /* Anchor jumps (and focused elements) clear the sticky nav. Lenis handles the smooth part. */
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--wall);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Rooms receive focus after an anchor jump (scrollToHash); no ring around a whole section. */
+  [tabindex='-1']:focus {
+    outline: none;
+  }
+
+}
+
+@layer components {
+  .skip-link {
+    position: fixed;
+    left: 12px;
+    top: -64px;
+    z-index: 100;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 600;
+    text-decoration: none;
+    transition: top var(--dur-fast) var(--ease-out);
+  }
+  .skip-link:focus {
+    top: 12px;
+  }
+}
+
+/* Theme switch: circular reveal from the toggle (View Transitions API). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fluid cursor (components/ui/FluidCursor.tsx). The native cursor is hidden only once the custom
+   one has moved, and it comes back over dialogs and full screen (the top layer sits above it). */
+@layer components {
+  .has-fluid-cursor,
+  .has-fluid-cursor * {
+    cursor: none !important;
+  }
+  html:has(dialog[open], :fullscreen).has-fluid-cursor,
+  html:has(dialog[open], :fullscreen).has-fluid-cursor * {
+    cursor: auto !important;
+  }
+  html:has(dialog[open], :fullscreen) .fluid-cursor {
+    display: none;
+  }
+  /* The wrapper makes no box at all: a fixed, faded or isolated wrapper would become its own layer
+     and stop the ring blending with the page behind it. Each part is fixed on its own instead. */
+  .fluid-cursor {
+    display: contents;
+  }
+  .fluid-cursor > * {
+    transition: opacity 0.25s;
+  }
+  .fluid-cursor:not([data-shown]) > * {
+    opacity: 0;
+  }
+  .fc-ring,
+  .fc-dot,
+  .fc-label-pos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  /* zero-size points, so rotation and stretch pivot on the pointer itself */
+  .fc-ring,
+  .fc-label-pos {
+    width: 0;
+    height: 0;
+  }
+  /* drawn in white with difference blending: dark on light walls, light on dark ones */
+  .fc-ring {
+    mix-blend-mode: difference;
+  }
+  .fc-ring:has(.is-label) {
+    mix-blend-mode: normal;
+  }
+  .fc-ring-shape {
+    translate: -50% -50%;
+    border: 1.5px solid #fff;
+    border-radius: 999px;
+    transition:
+      background-color 0.25s,
+      border-width 0.25s;
+  }
+  .fc-ring-shape.is-hover {
+    border-width: 2px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .fc-ring-shape.is-text {
+    border-width: 1px;
+    border-radius: 2px;
+    background: #fff;
+  }
+  .fc-ring-shape.is-label {
+    border-color: transparent;
+    background: var(--ink);
+  }
+  .fc-label-pos {
+    z-index: 10000;
+  }
+  .fc-label {
+    display: block;
+    width: max-content;
+    translate: -50% -50%;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--wall);
+  }
+  .fc-dot {
+    z-index: 10000;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+    transition: opacity 0.2s;
+  }
+  .fc-dot.is-hidden {
+    opacity: 0;
+  }
 }

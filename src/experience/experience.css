@@ -1,0 +1,123 @@
+/*
+ * Room 2: experience rows (DESIGN.md 6.4, preview.html "room 2"). The section clips sideways
+ * overflow with overflow-x: clip (not hidden, so nothing inside becomes a scroll container).
+ */
+@layer components {
+  .exp {
+    padding-block: clamp(72px, 10vw, 140px);
+    overflow-x: clip;
+    border-top: 1px solid var(--rule);
+    background: var(--wall);
+  }
+  /* same size as the other room titles (The collection) */
+  .exp-title {
+    font-size: clamp(2rem, 4.4vw, 3.6rem);
+    will-change: transform;
+  }
+  /* group heading: Technical (IT) / Non-technical, with a count on the right */
+  .exp-group {
+    margin-top: clamp(40px, 6vw, 72px);
+  }
+  .exp-group + .exp-group {
+    margin-top: clamp(32px, 4vw, 56px);
+  }
+  .exp-group-h {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+    margin-bottom: clamp(8px, 1.4vw, 16px);
+  }
+  .exp-group-title {
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .exp-group-note {
+    margin-left: 0.5em;
+  }
+  .exp-group-note {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--accent);
+  }
+  .exp-group-count {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink-2);
+  }
+  .exp-rows {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .exp-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: clamp(40px, 8vw, 120px) minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 10px clamp(16px, 3vw, 48px);
+    align-items: baseline;
+    padding-block: clamp(14px, 1.6vw, 20px);
+    will-change: transform, opacity;
+  }
+  /* hairline above the row, drawn in from the right */
+  .exp-line {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 1px;
+    background: var(--ink);
+    transform-origin: right;
+  }
+  .exp-n {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-2);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .exp-row:hover .exp-n {
+    color: var(--accent);
+  }
+  .exp-role {
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .exp-side {
+    display: grid;
+    gap: 4px;
+  }
+  .exp-org {
+    font-weight: 600;
+  }
+  .exp-what {
+    max-width: 46ch;
+    color: var(--ink-2);
+  }
+  .exp-when {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-2);
+  }
+  .exp-when.is-now {
+    color: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .exp-row {
+      grid-template-columns: 40px minmax(0, 1fr);
+    }
+    .exp-side {
+      grid-column: 2;
+    }
+  }
+}

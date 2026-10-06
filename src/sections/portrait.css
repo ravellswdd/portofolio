@@ -1,0 +1,202 @@
+/*
+ * The curator's portrait (DESIGN.md 6.2): a gallery print. Walnut moulding with a bevel and a
+ * fillet, a bottom-weighted mat with a bevel-cut window, glass with a reflection that drifts
+ * (Portrait.tsx), a brass picture light and its wash on the wall, and a small wall label.
+ */
+@layer components {
+  .portrait {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    margin: 34px 0 0;
+    transform-origin: 0 50%;
+    isolation: isolate;
+  }
+  @media (min-width: 901px) {
+    .portrait {
+      max-width: 500px;
+    }
+  }
+
+  /* brass picture light on a short arm, and the warm wash it throws down the wall */
+  .pt-light {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    width: 44%;
+    height: 11px;
+    translate: -50% 0;
+    border-radius: 6px 6px 3px 3px;
+    background: linear-gradient(180deg, #e2c58b, #a8803f 60%, #6d5126);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  }
+  .pt-light::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 3px;
+    height: 22px;
+    translate: -50% 0;
+    background: linear-gradient(90deg, #6d5126, #d9bb7f, #6d5126);
+  }
+  .pt-light::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 240%;
+    height: 1100%;
+    translate: -50% 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse 50% 46% at 50% 0%, var(--spot), transparent 72%);
+  }
+
+  /* walnut moulding: lit from above left, bevelled inner and outer edges */
+  .pt-frame {
+    position: relative;
+    display: block;
+    padding: 4.5%;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 45%),
+      linear-gradient(180deg, var(--frame-hi), var(--frame) 30%, color-mix(in srgb, var(--frame) 75%, #000));
+    box-shadow:
+      inset 2px 2px 0 rgba(255, 255, 255, 0.16),
+      inset -2px -2px 0 rgba(0, 0, 0, 0.45),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.5),
+      14px 30px 34px -16px var(--shadow),
+      4px 10px 12px -6px rgba(0, 0, 0, 0.28);
+  }
+  /* fillet: a thin raised lip between the moulding and the mat */
+  .pt-frame::before {
+    content: '';
+    position: absolute;
+    inset: calc(4.5% - 4px);
+    pointer-events: none;
+    border: 4px solid transparent;
+    border-image: linear-gradient(135deg, #8c6f4b, #4b3a29 50%, #2a201a) 1;
+  }
+
+  /* bottom-weighted mat, shaded where the frame overhangs it */
+  .pt-mat {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    padding: 7.5% 7.5% 10%;
+    background:
+      repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.012) 0 1px, transparent 1px 3px),
+      var(--mat);
+    box-shadow:
+      inset 0 5px 8px -4px rgba(0, 0, 0, 0.4),
+      inset 4px 0 6px -4px rgba(0, 0, 0, 0.25);
+  }
+  /* bevel cut: the white core of the board, lit on the top and left */
+  .pt-bevel {
+    display: block;
+    padding: 3px;
+    background: linear-gradient(135deg, #ffffff, #efece3 55%, #d9d5c9);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+  .pt-window {
+    display: block;
+    overflow: hidden;
+    background: #1b1d1c;
+  }
+  .pt-photo {
+    display: block;
+  }
+  .pt-photo img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  /* glass: an even sheen plus one reflection band that drifts with scroll */
+  .pt-glass {
+    position: absolute;
+    inset: 0 -40%;
+    pointer-events: none;
+    background: linear-gradient(
+      112deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.2) 46%,
+      rgba(255, 255, 255, 0.05) 52%,
+      transparent 58%
+    );
+  }
+
+  .pt-tag {
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-2);
+  }
+  .pt-tag span {
+    margin-right: 0.6em;
+    color: var(--ink);
+  }
+
+  /* Lit wall text (Statement.tsx): each line slides in, then the picture light sweeps along it. */
+  .st-line {
+    position: relative;
+    display: block;
+    width: fit-content;
+    isolation: isolate;
+    will-change: transform, opacity;
+  }
+  /* the lit colour is a gradient clipped to the letters: ink behind the light, ink-2 ahead of it */
+  .st-ink {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  /* the warm pool of the picture light on the wall, travelling with the sweep */
+  .st-glow {
+    position: absolute;
+    top: 50%;
+    z-index: -1;
+    width: 8em;
+    height: 2.6em;
+    translate: -50% -50%;
+    pointer-events: none;
+    background: radial-gradient(closest-side, var(--glow-warm), transparent);
+  }
+  /* key phrases: an accent underline drawn left to right once the line is lit */
+  .st-em {
+    position: relative;
+  }
+  .st-em i {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.02em;
+    height: 0.075em;
+    border-radius: 0.04em;
+    background: var(--accent);
+    transform-origin: left;
+  }
+  .st-em.joins i {
+    right: -0.3em;
+  }
+
+  /* Pinned statement (Statement.tsx, desktop): the room holds still while the words fill. The
+     track's extra height is the scroll distance the fill takes. */
+  .st-track {
+    height: 260vh;
+  }
+  .st-pin {
+    position: sticky;
+    top: var(--nav-h);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100svh - var(--nav-h));
+  }
+  /* keep the whole room on screen on shorter laptops: the print shrinks with the viewport height */
+  .st-pin .portrait {
+    max-width: min(500px, calc((100svh - var(--nav-h) - 230px) * 0.78));
+  }
+}
